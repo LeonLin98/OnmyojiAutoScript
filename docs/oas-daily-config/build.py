@@ -240,28 +240,44 @@ overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04)}
 .drift-h{font-size:12px;font-weight:600;color:var(--tx2);margin:14px 0 7px;
 padding-top:12px;border-top:1px dashed var(--line)}
 
-/* ★ 摺叠任務列表 */
-.list-h{display:flex;justify-content:space-between;padding:0 8px 6px;
-font-size:11px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--line);margin-bottom:2px}
+/* ★ 摺叠任務列表 —— 表頭與每一行共用同一套格線，保證對齊 */
+.list-h,details.task>summary{
+  display:grid;
+  grid-template-columns:12px minmax(96px,150px) 58px 1fr;
+  align-items:center;gap:0 10px;
+}
+.list-h{padding:0 10px 7px;font-size:11px;color:var(--dim);font-weight:600;
+border-bottom:1px solid var(--line);margin-bottom:2px}
+.list-h .h-cn{padding-left:0}
+.list-h .h-dot{display:block;width:12px;min-width:12px}
+.list-h .h-time{text-align:right}
+.list-h .h-quick{text-align:left}
 .tasklist{max-height:none}
-details.task{border-bottom:1px solid var(--line2)}
+details.task{border-bottom:1px solid var(--line2);margin:0;padding:0}
 details.task:last-child{border-bottom:none}
 details.task>summary{
-  display:grid;grid-template-columns:10px 148px auto 62px 1fr;
-  align-items:center;gap:8px;padding:6px 8px;cursor:pointer;list-style:none;
+  padding:7px 10px;cursor:pointer;list-style:none;
   font-size:12.5px;border-radius:5px;transition:background .12s}
 details.task>summary::-webkit-details-marker{display:none}
 details.task>summary:hover{background:#f8f9fb}
-.s-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.s-dot{width:9px;height:9px;border-radius:50%;display:inline-block;
+justify-self:center}
 details.task.on .s-dot{background:var(--on);box-shadow:0 0 0 3px rgba(26,127,55,.12)}
 details.task.off .s-dot{background:#c9d0da}
-details.task.on .s-cn{color:var(--tx);font-weight:600}
-details.task.off .s-cn{color:#a0a8b6;font-weight:500}
+.s-cn{display:flex;align-items:center;gap:0;min-width:0}
+.s-cn .nm-txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+details.task.on .s-cn .nm-txt{color:var(--tx);font-weight:600}
+details.task.off .s-cn .nm-txt{color:#a0a8b6;font-weight:500}
 details.task.on>summary{background:linear-gradient(90deg,rgba(26,127,55,.045),transparent 42%)}
-details.task .s-time{font-size:11.5px;color:var(--tx2);font-variant-numeric:tabular-nums}
+.s-time{font-size:11.5px;color:var(--tx2);text-align:right;
+font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
 details.task.off .s-time{color:#b8bfc9}
-.s-quick{font-size:11px;color:var(--dim);text-align:right;white-space:nowrap;
-overflow:hidden;text-overflow:ellipsis}
+.s-quick{font-size:11px;color:var(--dim);text-align:left;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.grp-sep{margin:10px 0 3px;padding:5px 10px 4px;font-size:10.5px;font-weight:700;
+color:var(--dim);letter-spacing:.5px;background:#f3f5f8;border-radius:5px;
+border-left:3px solid #ccd3dd}
+.grp-sep.on{color:var(--on);background:#eef7f0;border-left-color:var(--on)}
 details.task[open]>summary{background:#f2f6ff;border-bottom:1px solid var(--line)}
 .dt-wrap{padding:8px 10px 12px 26px;background:#fcfdfe}
 .dt-cap{font-size:10.5px;font-weight:700;color:var(--dim);letter-spacing:.4px;
@@ -285,14 +301,23 @@ button.mini:active{transform:translateY(1px)}
 def pane_html(cfg, daily, drift, tpl_tasks):
     m = MACHINES[cfg]
     tasks = [s for s in sorted(daily) if isinstance(daily[s], dict)]
+    # 啟用的排上面（同組內按原字母序）
+    tasks.sort(key=lambda s: (0 if (daily[s].get('scheduler') or {}).get('enable') is True else 1, s))
     btn_segs = set(snake(t) for t in tpl_tasks)
     en = [s for s in tasks if (daily[s].get('scheduler') or {}).get('enable') is True]
 
     rows = []
+    printed_off_header = False
     for seg in tasks:
         t = daily[seg]
         sch = t.get('scheduler') or {}
         is_on = sch.get('enable') is True
+        # 未啟用區段加一條分界提示（只加一次）
+        if not is_on and not printed_off_header:
+            printed_off_header = True
+            rows.append('<div class="grp-sep">未啟用（%d）</div>' % (len(tasks) - len(en)))
+        elif is_on and not rows:
+            rows.append('<div class="grp-sep on">已啟用（%d）</div>' % len(en))
         fields = []
         for grp, fs in t.items():
             if grp == 'scheduler' or not isinstance(fs, dict):
@@ -371,7 +396,7 @@ def pane_html(cfg, daily, drift, tpl_tasks):
             '<details class="task %s">'
             '<summary>'
             '<span class="s-dot"></span>'
-            '<span class="s-cn">%s</span>%s'
+            '<span class="s-cn"><span class="nm-txt">%s</span>%s</span>'
             '<span class="s-time">%s</span>'
             '<span class="s-quick">%s</span>'
             '</summary>'
@@ -403,7 +428,7 @@ def pane_html(cfg, daily, drift, tpl_tasks):
       任務 <b>%(total)d</b>　啟用 <b style="color:var(--on)">%(enabled)d</b>　停用 %(disabled)d</div>
   </div>
   <div class="pane-b">
-    <div class="list-h"><span>任務</span><span>時刻</span></div>
+    <div class="list-h"><span class="h-dot"></span><span class="h-cn">任務</span><span class="h-time">時刻</span><span class="h-quick">參數</span></div>
     <div class="tasklist">%(rows)s</div>
     <div class="drift-h">抓取時偏離（drift）</div>
     %(drift)s
