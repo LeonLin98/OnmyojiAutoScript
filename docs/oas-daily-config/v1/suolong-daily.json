@@ -1,9 +1,9 @@
 {
-  "config_name": "qingcui",
+  "config_name": "suolong",
   "running_task": "",
   "script": {
     "device": {
-      "serial": "823c342e",
+      "serial": "jzypu4mbbum79lyh",
       "handle": "",
       "package_name": "auto",
       "screenshot_method": "ADB_nc",
@@ -54,7 +54,7 @@
   "restart": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 0,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -110,7 +110,7 @@
   "area_boss": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -145,7 +145,7 @@
   "experience_youkai": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -168,7 +168,7 @@
   "gold_youkai": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -191,7 +191,7 @@
   "nian": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -224,7 +224,7 @@
       "when_attack_fail": "Refresh"
     },
     "general_battle_config": {
-      "lock_team_enable": false,
+      "lock_team_enable": true,
       "preset_enable": false,
       "preset_group": 1,
       "preset_team": 1,
@@ -244,27 +244,27 @@
   },
   "ryou_toppa": {
     "scheduler": {
-      "enable": true,
-      "next_run": "2026-10-26 21:00:00",
+      "enable": false,
+      "next_run": "2027-01-01 00:00:00",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
-      "server_update": "21:00:00",
+      "server_update": "09:00:00",
       "delay_date": 1,
       "float_time": "00:05:00"
     },
     "raid_config": {
       "limit_time": "01:30:00",
       "limit_count": 200,
-      "next_ryoutoppa_time": "21:00:00",
+      "next_ryoutoppa_time": "21:30:00",
       "skip_difficult": true,
       "ryou_access": false,
       "random_delay": true
     },
     "general_battle_config": {
       "lock_team_enable": false,
-      "preset_enable": true,
-      "preset_group": 5,
+      "preset_enable": false,
+      "preset_group": 1,
       "preset_team": 1,
       "green_enable": false,
       "green_mark": "green_left1",
@@ -273,8 +273,8 @@
       "random_click_swipt_enable": false
     },
     "switch_soul_config": {
-      "enable": true,
-      "switch_group_team": "5,1",
+      "enable": false,
+      "switch_group_team": "-1,-1",
       "enable_switch_by_name": false,
       "group_name": "",
       "team_name": ""
@@ -283,7 +283,7 @@
   "kekkai_utilize": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "00 06:00:00",
       "failure_interval": "00 06:00:00",
@@ -309,7 +309,7 @@
   "kekkai_activation": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "00 10:00:00",
@@ -330,11 +330,11 @@
   "demon_encounter": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 5,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
-      "server_update": "20:30:00",
+      "server_update": "19:10:00",
       "delay_date": 1,
       "float_time": "00:05:00"
     },
@@ -402,7 +402,7 @@
   "daily_trifles": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -417,18 +417,18 @@
       "guild_wish": false,
       "friend_love": true,
       "luck_msg": true,
-      "store_sign": true,
+      "store_sign": false,
       "buy_sushi_count": -1
     }
   },
   "talisman_pass": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
-      "success_interval": "00 12:00:00",
-      "failure_interval": "00 12:00:00",
-      "server_update": "20:30:00",
+      "success_interval": "01 00:00:00",
+      "failure_interval": "01 00:00:00",
+      "server_update": "19:10:00",
       "delay_date": 1,
       "float_time": "00:05:00"
     },
@@ -440,7 +440,7 @@
   "pets": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -455,7 +455,7 @@
   "souls_tidy": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -471,7 +471,7 @@
   "delegation": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -491,7 +491,7 @@
   "exploration": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -544,7 +544,7 @@
   "wanted_quests": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "00 12:00:00",
       "failure_interval": "00 12:00:00",
@@ -572,7 +572,7 @@
   "tako": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -598,7 +598,7 @@
   "auto_checkin_big_god": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -622,7 +622,7 @@
       "float_time": "00:00:00"
     },
     "orochi_config": {
-      "user_status": "leader",
+      "user_status": "member",
       "layer": "悲鸣",
       "limit_time": "23:59:59",
       "limit_count": 50,
@@ -631,14 +631,14 @@
     },
     "invite_config": {
       "invite_number": "one",
-      "friend_1": "索隆的迷妹妹",
+      "friend_1": "清脆的宫司",
       "friend_2": "",
       "find_mode": "auto_find",
       "wait_time": "00:02:00",
       "default_invite": true
     },
     "general_battle_config": {
-      "lock_team_enable": true,
+      "lock_team_enable": false,
       "preset_enable": true,
       "preset_group": 2,
       "preset_team": 1,
@@ -664,7 +664,7 @@
   "orochi_moans": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -676,7 +676,7 @@
   "sougenbi": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -716,7 +716,7 @@
   "fallen_sun": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -760,7 +760,7 @@
   "eternity_sea": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -811,7 +811,7 @@
   "six_realms": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -834,7 +834,7 @@
   "other_world_twilight": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -877,7 +877,7 @@
   "activity_shikigami": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -887,11 +887,11 @@
     },
     "general_climb": {
       "limit_time": "23:59:59",
-      "pass_limit": 16,
+      "pass_limit": 20,
       "ap_limit": 300,
       "boss_limit": 20,
-      "ap100_limit": 20,
-      "run_sequence": "ap",
+      "ap100_limit": 29,
+      "run_sequence": "ap100",
       "active_souls_clean": false,
       "random_sleep": false
     },
@@ -935,7 +935,7 @@
   "meta_demon": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -964,7 +964,7 @@
   "frog_boss": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -980,7 +980,7 @@
   "float_parade": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "03 00:00:00",
       "failure_interval": "03 00:00:00",
@@ -996,7 +996,7 @@
   "quiz": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1012,7 +1012,7 @@
   "kitty_shop": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1028,7 +1028,7 @@
   "dye_trials": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1056,7 +1056,7 @@
       "float_time": "00:00:00"
     },
     "bondling_config": {
-      "user_status": "member",
+      "user_status": "leader",
       "bondling_mode": "只刷契灵(低级式盘)",
       "limit_time": "05:00:00",
       "limit_count": 100,
@@ -1068,7 +1068,7 @@
     },
     "invite_config": {
       "invite_number": "one",
-      "friend_1": "索隆的迷妹妹",
+      "friend_1": "清脆的宫司",
       "friend_2": "",
       "find_mode": "auto_find",
       "wait_time": "00:04:00",
@@ -1101,7 +1101,7 @@
   "evo_zone": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1146,8 +1146,8 @@
   },
   "goryou_realm": {
     "scheduler": {
-      "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "enable": false,
+      "next_run": "<滾動，不記錄>",
       "priority": 5,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1156,12 +1156,12 @@
       "float_time": "00:00:00"
     },
     "goryou_config": {
-      "limit_time": "05:00:00",
-      "limit_count": 1000,
-      "goryou_class": "暗白蔵主"
+      "limit_time": "00:30:00",
+      "limit_count": 30,
+      "goryou_class": "随机"
     },
     "general_battle_config": {
-      "lock_team_enable": true,
+      "lock_team_enable": false,
       "preset_enable": false,
       "preset_group": 1,
       "preset_team": 1,
@@ -1169,7 +1169,7 @@
       "green_mark": "green_left1",
       "green_mark_type": "choose",
       "green_mark_name": "",
-      "random_click_swipt_enable": true
+      "random_click_swipt_enable": false
     },
     "switch_soul_config": {
       "enable": false,
@@ -1182,7 +1182,7 @@
   "hyakkiyakou": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1223,7 +1223,7 @@
   "hero_test": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1261,7 +1261,7 @@
   "find_jade": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 5,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1293,7 +1293,7 @@
   "memory_scrolls": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1316,7 +1316,7 @@
   "true_orochi": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "03 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1338,7 +1338,7 @@
   "rich_man": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1423,7 +1423,7 @@
   "secret": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "07 00:00:00",
       "failure_interval": "07 00:00:00",
@@ -1459,7 +1459,7 @@
   "weekly_trifles": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "07 00:00:00",
       "failure_interval": "07 00:00:00",
@@ -1478,7 +1478,7 @@
   "mystery_shop": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1504,8 +1504,8 @@
   },
   "duel": {
     "scheduler": {
-      "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "enable": true,
+      "next_run": "<滾動，不記錄>",
       "priority": 5,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1518,8 +1518,8 @@
       "switch_onmyoji": "源赖光",
       "switch_all_soul": false,
       "limit_time": "00:30:00",
-      "target_score": 2000,
-      "honor_full_exit": false,
+      "target_score": 2500,
+      "honor_full_exit": true,
       "green_enable": false,
       "green_mark": "green_left1"
     },
@@ -1539,7 +1539,7 @@
   "collective_missions": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1556,11 +1556,11 @@
   "hunt": {
     "scheduler": {
       "enable": true,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 5,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
-      "server_update": "20:30:00",
+      "server_update": "19:10:00",
       "delay_date": 1,
       "float_time": "00:05:00"
     },
@@ -1598,7 +1598,7 @@
   "dokan": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1650,7 +1650,7 @@
   "abyss_shadows": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1691,7 +1691,7 @@
   "guild_banquet": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1709,7 +1709,7 @@
   "demon_retreat": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1742,7 +1742,7 @@
   "guild_activity_monitor": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",
@@ -1767,7 +1767,7 @@
   "budokai_tournament": {
     "scheduler": {
       "enable": false,
-      "next_run": "<滚動，不記錄>",
+      "next_run": "<滾動，不記錄>",
       "priority": 4,
       "success_interval": "01 00:00:00",
       "failure_interval": "01 00:00:00",

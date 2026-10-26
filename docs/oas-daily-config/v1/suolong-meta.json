@@ -3,11 +3,11 @@
   "date": "2026-10-26",
   "captured_at": "2026-10-26T16:16:00+08:00",
   "machine": {
-    "name": "清脆",
-    "vm": "VM106",
-    "ip": "192.168.250.241",
-    "phone": "OnePlus5",
-    "serial": "823c342e"
+    "name": "索隆",
+    "vm": "VM103",
+    "ip": "192.168.250.240",
+    "phone": "K30U",
+    "serial": "jzypu4mbbum79lyh"
   },
   "oas": {
     "head": "cc65d55dae353c810b1733dd59d692bff514fc0f",
@@ -30,7 +30,7 @@
     "next_run": "不記錄（滾動值）"
   },
   "summary": {
-    "total_task_segments": 58,
-    "enabled": 11
+    "total_task_segments": 56,
+    "enabled": 10
   }
 }
