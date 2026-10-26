@@ -67,6 +67,29 @@ TASK_CN = {
 # 空佔位段：無配置、不在 script_menu，只留 scheduler
 PLACEHOLDER_SEGS = {'orochi_moans'}
 
+# 參數欄位中文標籤（取自 OAS 官方 i18n，僅列常用）
+FIELD_CN = {
+    'user_status': '身份', 'limit_count': '次數', 'limit_time': '限時',
+    'layer': '層', 'layer_limit': '層限', 'number_attack': '攻打次數',
+    'number_base': '額外基礎', 'exit_four': '打九退四',
+    'order_attack': '攻打順序', 'three_refresh': '三次刷新',
+    'when_attack_fail': '失敗處理', 'skip_difficult': '跳過困難',
+    'ryou_access': '突破權限', 'random_delay': '隨機延遲',
+    'next_ryoutoppa_time': '下次時刻', 'soul_buff_enable': '御魂加成',
+    'bondling_mode': '模式', 'bondling_stone_class': '式盤',
+    'bondling_stone_enable': '用式盤', 'bondling_search_enable': '探查',
+    'check_enable': '檢查契憶', 'limit_num': '契憶上限',
+    'goryou_class': '類型', 'kirin_type': '麒麟類型',
+    'kirin_group_team': '麒麟陣容', 'netherworld_group_team': '陰界陣容',
+    'preset_enable': '切換預設', 'preset_group': '預設組',
+    'preset_team': '預設隊', 'green_enable': '綠標',
+    'green_mark': '綠標位置', 'green_mark_type': '綠標方式',
+    'green_mark_name': '綠標式神', 'random_click_swipt_enable': '隨機點擊',
+    'lock_team_enable': '鎖定隊伍', 'switch_soul_enable': '切換御魂',
+    'exploration_level': '探索層數', 'explore_level': '探索層數',
+    'choose_rarity': '稀有度', 'auto_rotate': '自動旋轉',
+}
+
 
 def load_json(p):
     raw = open(p, 'rb').read()
@@ -216,6 +239,46 @@ overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04)}
 .pane-b .kv{font-size:10.5px}
 .drift-h{font-size:12px;font-weight:600;color:var(--tx2);margin:14px 0 7px;
 padding-top:12px;border-top:1px dashed var(--line)}
+
+/* ★ 摺叠任務列表 */
+.list-h{display:flex;justify-content:space-between;padding:0 8px 6px;
+font-size:11px;color:var(--dim);font-weight:600;border-bottom:1px solid var(--line);margin-bottom:2px}
+.tasklist{max-height:none}
+details.task{border-bottom:1px solid var(--line2)}
+details.task:last-child{border-bottom:none}
+details.task>summary{
+  display:grid;grid-template-columns:10px 148px auto 62px 1fr;
+  align-items:center;gap:8px;padding:6px 8px;cursor:pointer;list-style:none;
+  font-size:12.5px;border-radius:5px;transition:background .12s}
+details.task>summary::-webkit-details-marker{display:none}
+details.task>summary:hover{background:#f8f9fb}
+.s-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+details.task.on .s-dot{background:var(--on);box-shadow:0 0 0 3px rgba(26,127,55,.12)}
+details.task.off .s-dot{background:#c9d0da}
+details.task.on .s-cn{color:var(--tx);font-weight:600}
+details.task.off .s-cn{color:#a0a8b6;font-weight:500}
+details.task.on>summary{background:linear-gradient(90deg,rgba(26,127,55,.045),transparent 42%)}
+details.task .s-time{font-size:11.5px;color:var(--tx2);font-variant-numeric:tabular-nums}
+details.task.off .s-time{color:#b8bfc9}
+.s-quick{font-size:11px;color:var(--dim);text-align:right;white-space:nowrap;
+overflow:hidden;text-overflow:ellipsis}
+details.task[open]>summary{background:#f2f6ff;border-bottom:1px solid var(--line)}
+.dt-wrap{padding:8px 10px 12px 26px;background:#fcfdfe}
+.dt-cap{font-size:10.5px;font-weight:700;color:var(--dim);letter-spacing:.4px;
+text-transform:uppercase;margin:6px 0 4px}
+table.dt{font-size:11.5px;width:100%}
+table.dt td{padding:3px 8px 3px 0;border-bottom:1px dotted #eef0f4;vertical-align:top}
+table.dt td.dn{color:var(--dim);width:44%;white-space:nowrap;font-family:ui-monospace,monospace;font-size:10.5px}
+.dn-cn{font-family:inherit;color:var(--tx2);font-size:11px;margin-left:5px;font-weight:500}
+table.dt td.dv{color:var(--tx);font-weight:500}
+table.dt tr:last-child td{border-bottom:none}
+details.task.off .dt-wrap{opacity:.82}
+/* 展開/收起按鈕 */
+button.mini{font-size:11px;padding:3px 10px;margin-left:8px;border:1px solid var(--line);
+background:#fff;color:var(--tx2);border-radius:6px;cursor:pointer;font-weight:500;
+vertical-align:middle;transition:all .12s}
+button.mini:hover{background:var(--accbg);border-color:#c7d9fb;color:var(--acc)}
+button.mini:active{transform:translateY(1px)}
 """
 
 
@@ -229,27 +292,96 @@ def pane_html(cfg, daily, drift, tpl_tasks):
     for seg in tasks:
         t = daily[seg]
         sch = t.get('scheduler') or {}
+        is_on = sch.get('enable') is True
         fields = []
         for grp, fs in t.items():
             if grp == 'scheduler' or not isinstance(fs, dict):
                 continue
             for f in fs:
                 fields.append((grp, f))
-        parts = []
-        for grp, f in sorted(fields):
-            val = (t.get(grp) or {}).get(f)
-            parts.append('<span class="kv">%s=<b>%s</b></span>' % (esc(f), vcell(val)))
         badge = '<span class="badge">按鈕</span>' if seg in btn_segs else ''
         if seg in PLACEHOLDER_SEGS:
             badge += '<span class="badge ph">空佔位</span>'
         cn = TASK_CN.get(seg, seg)
+
+        # 收起時可見的參數摘要：優先序 + 最有代表性的 1-2 個參數
+        quick = []
+        pri = sch.get('priority')
+        if pri is not None:
+            quick.append('優先 %s' % pri)
+
+        # 按代表性挑第一個存在的關鍵欄位
+        PICK = [
+            ('limit_count', '次數'),
+            ('number_attack', '攻打'),
+            ('limit_time', '限時'),
+            ('layer', '層'),
+            ('goryou_class', '類型'),
+            ('bondling_mode', '模式'),
+            ('bondling_stone_class', '式盤'),
+            ('explore_level', '關卡'),
+            ('exploration_level', '關卡'),
+            ('layer_limit', '層限'),
+            ('kirin_type', '麒麟'),
+            ('when_attack_fail', '失敗'),
+        ]
+        shown = 0
+        for grp, fs in t.items():
+            if grp == 'scheduler' or not isinstance(fs, dict):
+                continue
+            for field, label in PICK:
+                v = fs.get(field)
+                if v is None or v == '' or v == '-1,-1':
+                    continue
+                s = str(v)
+                if s in ('False', 'false') or s == ROLL:
+                    continue
+                if len(s) > 12:
+                    s = s[:12] + '…'
+                quick.append('%s %s' % (label, s))
+                shown += 1
+                break
+            if shown >= 2:
+                break
+        quick_txt = '　'.join(quick)
+
+        # 展開後的完整參數表（欄位名附中文）
+        detail_rows = ''.join(
+            '<tr><td class="dn">%s%s</td><td class="dv">%s</td></tr>' % (
+                esc(f),
+                ('<span class="dn-cn">%s</span>' % esc(FIELD_CN[f])) if f in FIELD_CN else '',
+                vcell((t.get(grp) or {}).get(f)))
+            for grp, f in sorted(fields))
+        detail = (
+            '<div class="dt-wrap">'
+            '<div class="dt-cap">排程</div>'
+            '<table class="dt"><tbody>'
+            '<tr><td class="dn">啟用</td><td class="dv">%s</td></tr>'
+            '<tr><td class="dn">時刻 server_update</td><td class="dv">%s</td></tr>'
+            '<tr><td class="dn">優先序 priority</td><td class="dv">%s</td></tr>'
+            '<tr><td class="dn">next_run</td><td class="dv"><span class="dim">不記錄（滾動值）</span></td></tr>'
+            '</tbody></table>%s</div>'
+        ) % (vcell(sch.get('enable')),
+             vcell(sch.get('server_update')) or '<span class="dim">—</span>',
+             vcell(sch.get('priority')) or '—',
+             ('<div class="dt-cap">參數</div><table class="dt"><tbody>' + detail_rows + '</tbody></table>')
+             if detail_rows else '')
+
         rows.append(
-            '<tr><td class="tn">%s%s<br><code>%s</code></td>'
-            '<td>%s</td><td>%s</td><td class="dim">%s</td><td class="ext">%s</td></tr>' % (
-                esc(cn), badge, esc(seg), vcell(sch.get('enable')),
+            '<details class="task %s">'
+            '<summary>'
+            '<span class="s-dot"></span>'
+            '<span class="s-cn">%s</span>%s'
+            '<span class="s-time">%s</span>'
+            '<span class="s-quick">%s</span>'
+            '</summary>'
+            '%s'
+            '</details>' % (
+                'on' if is_on else 'off',
+                esc(cn), badge,
                 vcell(sch.get('server_update')) or '<span class="dim">—</span>',
-                vcell(sch.get('priority')) or '—',
-                ' '.join(parts) or '<span class="dim">—</span>'))
+                esc(quick_txt),
+                detail))
 
     if drift:
         drows = ''.join(
@@ -271,8 +403,8 @@ def pane_html(cfg, daily, drift, tpl_tasks):
       任務 <b>%(total)d</b>　啟用 <b style="color:var(--on)">%(enabled)d</b>　停用 %(disabled)d</div>
   </div>
   <div class="pane-b">
-    <table><thead><tr><th>任務</th><th>啟用</th><th>時刻</th><th>優先</th><th>參數</th></tr></thead>
-    <tbody>%(rows)s</tbody></table>
+    <div class="list-h"><span>任務</span><span>時刻</span></div>
+    <div class="tasklist">%(rows)s</div>
     <div class="drift-h">抓取時偏離（drift）</div>
     %(drift)s
   </div>
@@ -353,7 +485,9 @@ def render_all(data, version, date, captured, tpl_all):
 頁面上 <code>friend_1</code> 出現另一台的名字是跨號好友名，屬本機真實值。</span>
 </div></div>
 
-<h2>一、兩台並列對照<span class="cnt">左＝清脆 VM106　右＝索隆 VM103</span></h2>
+<h2>一、兩台並列對照<span class="cnt">點任務名展開參數　灰＝未啟用　綠＝已啟用</span>
+<button id="expandAll" class="mini">全部展開</button>
+<button id="collapseAll" class="mini">全部收起</button></h2>
 <div class="split">
 %(panes)s
 </div>
@@ -371,7 +505,19 @@ JSON：<code>qingcui-daily.json</code> · <code>suolong-daily.json</code>　｜�
 
 <p class="dim" style="margin-top:26px;font-size:11.5px;text-align:center">
 OAS 日常配置記錄 · %(version)s · 由兩份 daily.json 渲染生成
-</p></body></html>""" % {
+</p>
+<script>
+(function(){
+  var ea=document.getElementById('expandAll'), ca=document.getElementById('collapseAll');
+  if(ea) ea.addEventListener('click', function(){
+    document.querySelectorAll('details.task').forEach(function(d){ d.open=true; });
+  });
+  if(ca) ca.addEventListener('click', function(){
+    document.querySelectorAll('details.task').forEach(function(d){ d.open=false; });
+  });
+})();
+</script>
+</body></html>""" % {
         'version': version, 'date': date, 'captured': captured, 'css': CSS,
         'panes': ''.join(panes), 'diff': diff_html, 'diff_cnt': diff_cnt,
         'head': esc(OAS['head']), 'patches': patches,
