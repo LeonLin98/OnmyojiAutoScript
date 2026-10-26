@@ -1,6 +1,17 @@
 # OAS 日常配置記錄
 
-陰陽師 OnmyojiAutoScript 兩台真機（清脆 / 索隆）的日常配置永久版本記錄。
+陰陽師 OnmyojiAutoScript 兩台真機的日常配置永久版本記錄。
+
+## 兩台分開記錄
+
+每台一份，互不混寫：
+
+| 機器 | VM | IP | 手機 | ADB serial | 目錄 |
+|---|---|---|---|---|---|
+| 清脆 qingcui | VM106 | 192.168.250.241 | OnePlus5 | `823c342e` | `vN/qingcui/` |
+| 索隆 suolong | VM103 | 192.168.250.240 | K30U | `jzypu4mbbum79lyh` | `vN/suolong/` |
+
+兩台 OAS 各自獨立（VM / 手機 / ADB / 22288 端口互不相干），同刻執行不互搶。
 
 ## 為什麼要有這個
 
@@ -12,7 +23,7 @@
 | 真機 `config/*.json` | **實際態** | 部署結果，可能因按鈕操作而偏離 |
 | Agent 改動 | 動作 | 同時寫入上面兩處，不是獨立的第三份數據 |
 
-本目錄記錄的是**合成的日常定義**（`daily.json`），並保留真機實測（`deployed.json`）與差異（`drift.json`）作為排查依據。
+本記錄存的是**合成的日常定義**（`daily.json`），另存真機實測（`deployed.json`）與差異（`drift.json`）作為排查依據。
 
 ## ★ 核心規則
 
@@ -20,11 +31,20 @@
 2. **`next_run` 一律不記錄** —— 滾動值，每天不同，記了只會製造假差異。
 3. **部署失敗不升版本。** 只更新 `deployed.json` 與 `drift.json`。
 4. **`drift.json` 空 = 部署成功；非空 = 排查入口。**
+5. **按鈕任務取模板值，其餘取真機值** —— 詳見下節。
+
+## 取值規則
+
+還原按鈕只覆蓋 4 個任務（`ryou_toppa` / `orochi` / `bondling_fairyland` / `realm_raid`），
+其餘 52 個任務它不碰。所以：
+
+- **這 4 個任務** → 取 `pair.html` 的 `DAILY` 模板值（還原按鈕寫回什麼，日常就是什麼）
+- **其餘 52 個任務** → 取真機值（真機即日常）
 
 ## 排查流程
 
 ```
-vN/daily.json（應該是什麼）
+vN/<機器>/daily.json（應該是什麼）
         vs
 真機實測（實際是什麼）
         ↓
@@ -33,9 +53,7 @@ vN/daily.json（應該是什麼）
    哪個環節把值改壞了
 ```
 
-三種 drift 結果的含義：
-
-| 情況 | 含義 | 處理 |
+| drift 情況 | 含義 | 處理 |
 |---|---|---|
 | 空 | 部署成功，真機 = 日常 | 無需動作 |
 | 有差異 | 部署失敗 / 被按鈕臨時改過 | 看欄位歸屬哪個任務 |
@@ -43,45 +61,43 @@ vN/daily.json（應該是什麼）
 
 ### 按鈕任務的漂移是預期的
 
-`ryou_toppa` / `orochi` / `bondling_fairyland` / `realm_raid` 這 4 個任務會被快捷按鈕臨時改寫。
 按鈕跑完後真機會偏離日常（燈變黃），**按「還原」後才恢復**。
-所以抓 drift 的時機很重要：**應該在「按還原之後、沒按任何按鈕」時抓**，否則 drift 全是按鈕造成的臨時值，沒有排查價值。
+抓 drift 的時機很重要：**應該在「按還原之後、沒按任何按鈕」時抓**，
+否則 drift 全是按鈕造成的臨時值，沒有排查價值。
 
 ## 版本歷史
 
 | 版本 | 日期 | 摘要 |
 |---|---|---|
-| [v1](v1/) | 2026-10-26 | 首次建立基線。全 56 任務段 × 2 台。 |
+| [v1](v1/) | 2026-10-26 | 首次建立基線。清脆 56 任務（啟用 11）、索隆 56 任務（啟用 10）。 |
 
 ## 目錄結構
 
 ```
+build.py                  生成器（可重跑）
 vN/
-  daily.json      ★ 日常唯一真源（全量任務）
-  meta.json         版本號、日期、機器、OAS commit、補丁 sha256、啟用摘要
-  daily.html        人看的報告（由 daily.json 渲染）
-  deployed.json     真機實測快照（scheduler 段），證據用
-  drift.json        daily.json vs 真機 的差異
+  daily-template.json     pair.html DAILY 模板快照（按鈕任務的意圖態）
+  raw/
+    qingcui.json          清脆真機 config 原文（抓取證據）
+    suolong.json          索隆真機 config 原文
+  qingcui/                ★ 清脆獨立一份
+    daily.json            該台日常唯一真源
+    meta.json             版本／日期／機器／OAS commit／補丁 sha256
+    daily.html            該台報告
+    deployed.json         該台真機實測（scheduler 段）
+    drift.json            該台 daily vs 真機 差異
+  suolong/                ★ 索隆獨立一份（同構）
+    ...
 ```
-
-## 兩台機器
-
-| 名稱 | VM | IP | 手機 | ADB serial | config |
-|---|---|---|---|---|---|
-| 清脆 qingcui | VM106 | 192.168.250.241 | OnePlus5 | `823c342e` | `config/qingcui.json` |
-| 索隆 suolong | VM103 | 192.168.250.240 | K30U | `jzypu4mbbum79lyh` | `config/suolong.json` |
-
-兩台 OAS 各自獨立（VM / 手機 / ADB / 22288 端口互不相干），同刻執行不會互搶。
 
 ## 更新方式
 
-需要更新時手動執行，不自動化：
+```bash
+# 1. 抓兩台真機 config 到 vN/raw/
+# 2. 抽 pair.html 的 DAILY 到 vN/daily-template.json
+# 3. 生成
+python3 build.py --version vN --date 2026-MM-DD --captured "2026-MM-DDT..:..:..+08:00"
+```
 
-1. 從兩台真機抓全量 config
-2. 按鈕任務用 `pair.html` 的 `DAILY` 模板值覆蓋
-3. 抹掉所有 `next_run`
-4. 若日常實際有變 → 升 `vN+1`；若只是部署驗證 → 只更新現有版本的 `deployed.json` / `drift.json`
-5. 重新渲染 `daily.html`
-
-> 範圍說明：本記錄收**全部**日常任務，不只是還原按鈕覆蓋的那 4 個。
-> 原因是還原按鈕只覆蓋 4 個任務，其餘 52 個任務的日常狀態只能從真機得知，不記就沒有記錄。
+升不升版本，看 `daily.json` 有沒有實質變化（換任務 / 改時刻 / 改次數 / 改陣容）。
+只是重新部署驗證 → 版本號不動，只更新 `deployed.json` 與 `drift.json`。

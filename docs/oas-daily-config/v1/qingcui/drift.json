@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-26T16:16:00+08:00",
+  "machine": "qingcui",
+  "diffs": [
+    {
+      "task": "bondling_fairyland",
+      "field": "scheduler.enable",
+      "should_be": false,
+      "actually": true
+    },
+    {
+      "task": "bondling_fairyland",
+      "field": "bondling_config.user_status",
+      "should_be": "member",
+      "actually": "leader"
+    }
+  ]
+}

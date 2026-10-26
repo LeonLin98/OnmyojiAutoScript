@@ -1,0 +1,115 @@
+{
+  "qingcui": {
+    "RyouToppa": {
+      "enable": true,
+      "slot": "21:00:00",
+      "scheduler": {
+        "server_update": "21:00:00"
+      },
+      "raid_config": {
+        "limit_count": 200,
+        "limit_time": "01:30:00",
+        "next_ryoutoppa_time": "21:00:00",
+        "skip_difficult": true,
+        "ryou_access": false,
+        "random_delay": true
+      }
+    },
+    "Orochi": {
+      "enable": true,
+      "slot": "09:30:00",
+      "scheduler": {
+        "server_update": "09:30:00"
+      },
+      "orochi_config": {
+        "user_status": "leader",
+        "layer": "悲鸣",
+        "limit_count": 50,
+        "limit_time": "23:59:59",
+        "soul_buff_enable": true
+      }
+    },
+    "BondlingFairyland": {
+      "enable": false,
+      "next_run": "2027-01-01 00:00:00",
+      "scheduler": {
+        "server_update": "09:00:00"
+      },
+      "bondling_config": {
+        "user_status": "member",
+        "limit_count": 100
+      }
+    },
+    "RealmRaid": {
+      "enable": true,
+      "scheduler": {
+        "server_update": "09:10:00"
+      },
+      "raid_config": {
+        "number_attack": 30,
+        "number_base": 0,
+        "exit_four": true,
+        "order_attack": "5 > 4 > 3 > 2 > 1 > 0",
+        "three_refresh": false,
+        "when_attack_fail": "Refresh"
+      },
+      "switch_soul_config": {
+        "enable": false
+      }
+    }
+  },
+  "suolong": {
+    "RyouToppa": {
+      "enable": false,
+      "next_run": "2027-01-01 00:00:00",
+      "scheduler": {
+        "server_update": "09:00:00"
+      },
+      "raid_config": {
+        "limit_count": 200
+      }
+    },
+    "Orochi": {
+      "enable": true,
+      "slot": "09:30:00",
+      "scheduler": {
+        "server_update": "09:30:00"
+      },
+      "orochi_config": {
+        "user_status": "member",
+        "layer": "悲鸣",
+        "limit_count": 50,
+        "limit_time": "23:59:59",
+        "soul_buff_enable": true
+      }
+    },
+    "BondlingFairyland": {
+      "enable": false,
+      "next_run": "2027-01-01 00:00:00",
+      "scheduler": {
+        "server_update": "09:00:00"
+      },
+      "bondling_config": {
+        "user_status": "leader",
+        "limit_count": 100
+      }
+    },
+    "RealmRaid": {
+      "enable": true,
+      "scheduler": {
+        "server_update": "09:10:00"
+      },
+      "raid_config": {
+        "number_attack": 30,
+        "number_base": 0,
+        "exit_four": true,
+        "order_attack": "5 > 4 > 3 > 2 > 1 > 0",
+        "three_refresh": false,
+        "when_attack_fail": "Refresh"
+      },
+      "switch_soul_config": {
+        "enable": false
+      }
+    }
+  }
+}
