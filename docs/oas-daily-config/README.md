@@ -10,6 +10,7 @@ oas-daily-config/
   build.py                      生成器（可重跑）
   vN/
     daily-template.json         pair.html 的 DAILY 模板快照
+    i18n-zh-CN.json             OAS 官方任务中文名映射（来自 module/config/i18n）
     raw/
       qingcui.json              清脆真機 config 原文（抓取證據）
       suolong.json              索隆真機 config 原文
@@ -86,6 +87,14 @@ vN/<機器>-daily.json（應該是什麼）
 按鈕跑完後真機會偏離日常（燈變黃），**按「還原」後才恢復**。
 抓 drift 的時機很重要：**應該在「按還原之後、沒按任何按鈕」時抓**，
 否則 drift 全是按鈕造成的臨時值，沒有排查價值。
+
+### 任務中文名來源
+
+全部取 OAS **官方** i18n（`module/config/i18n/zh-CN.json` + `assets/i18n/zh-CN.json`），
+不是我自創的譯名。56 個任務段中 55 個有官方中文。
+
+唯一例外 `orochi_moans` 標為「御魂·悲鳴（占位段）」並加 <span>空佔位</span> 標記 ——
+它是上游留下的空段：沒有任何配置字段，也不在 `script_menu` 的可運行清單裡，只有一個空的 scheduler。
 
 ### `friend_1` 會出現另一台的名字
 

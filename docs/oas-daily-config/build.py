@@ -42,15 +42,30 @@ OAS = {
 ROLL = '<滾動，不記錄>'
 
 TASK_CN = {
-    'ryou_toppa': '寮突破', 'orochi': '御魂', 'bondling_fairyland': '契靈',
-    'realm_raid': '個人突破', 'goryou_realm': '御靈', 'demon_encounter': '逢魔',
-    'area_boss': '地域鬼王', 'daily_trifles': '每日瑣事', 'gold_youkai': '金幣妖怪',
-    'talisman_pass': '符咒通行', 'restart': '重啟', 'hunt': '狩獵', 'duel': '鬥技',
-    'wanted_quests': '懸賞', 'exploration': '探索', 'evo_zone': '進化',
-    'souls_tidy': '御魂整理', 'script': '腳本全局', 'global_game': '全局遊戲',
-    'rich_man': '大富翁', 'kekkai_activation': '結界卡', 'kekkai_utilize': '結界寄養',
-    'mystery_shop': '神秘商店', 'guild_banquet': '寮宴', 'true_orochi': '真御魂',
+    'abyss_shadows': '狭间暗域', 'activity_shikigami': '当期爬塔', 'area_boss': '地域鬼王',
+    'auto_checkin_big_god': '大神签到', 'bondling_fairyland': '契灵之境',
+    'budokai_tournament': '武道大会', 'collective_missions': '集体任务',
+    'daily_trifles': '每日琐事', 'delegation': '式神委派', 'demon_encounter': '逢魔之时',
+    'demon_retreat': '首领退治', 'dokan': '道馆', 'duel': '斗技',
+    'dye_trials': '灵染试炼', 'eternity_sea': '永生之海', 'evo_zone': '觉醒副本',
+    'experience_youkai': '经验妖怪', 'exploration': '探索', 'fallen_sun': '日轮之陨',
+    'find_jade': '寻找协作任务', 'float_parade': '花车巡游', 'frog_boss': '对弈竞猜',
+    'global_game': '全局配置', 'gold_youkai': '金币妖怪', 'goryou_realm': '御灵之境',
+    'guild_activity_monitor': '寮活动监控', 'guild_banquet': '寮宴会',
+    'hero_test': '英杰试炼', 'hunt': '狩猎战', 'hyakkiyakou': '百鬼夜行',
+    'kekkai_activation': '结界挂卡', 'kekkai_utilize': '结界蹭卡',
+    'kitty_shop': '猫咪铺子', 'memory_scrolls': '绘卷', 'meta_demon': '超鬼王',
+    'mystery_shop': '神秘商店', 'nian': '年兽', 'orochi': '八岐大蛇',
+    'orochi_moans': '御魂·悲鸣（占位段）',
+    'other_world_twilight': '彼世逢魔', 'pets': '小猫咪', 'quiz': '智力竞赛',
+    'realm_raid': '个人突破', 'restart': '重启', 'rich_man': '大富翁',
+    'ryou_toppa': '寮突破', 'script': '脚本', 'secret': '秘闻副本',
+    'six_realms': '六道之门', 'sougenbi': '业原火', 'souls_tidy': '御魂整理',
+    'tako': '石距', 'talisman_pass': '花合战', 'true_orochi': '真八岐大蛇',
+    'wanted_quests': '悬赏封印', 'weekly_trifles': '每周琐事',
 }
+# 空佔位段：無配置、不在 script_menu，只留 scheduler
+PLACEHOLDER_SEGS = {'orochi_moans'}
 
 
 def load_json(p):
@@ -174,6 +189,7 @@ color:#5a6577;background:#f2f4f7;padding:1px 5px;border-radius:3px}
 .dim{color:var(--dim)}
 .badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;
 margin-left:5px;vertical-align:middle;font-weight:600;background:var(--accbg);color:var(--acc)}
+.badge.ph{background:#f1f3f6;color:#8a94a6}
 .kv{display:inline-block;background:#f8f9fb;border:1px solid var(--line);
 border-radius:4px;padding:0 5px;margin:1px 2px 1px 0;font-size:11px;color:var(--tx2);
 white-space:nowrap}
@@ -224,6 +240,8 @@ def pane_html(cfg, daily, drift, tpl_tasks):
             val = (t.get(grp) or {}).get(f)
             parts.append('<span class="kv">%s=<b>%s</b></span>' % (esc(f), vcell(val)))
         badge = '<span class="badge">按鈕</span>' if seg in btn_segs else ''
+        if seg in PLACEHOLDER_SEGS:
+            badge += '<span class="badge ph">空佔位</span>'
         cn = TASK_CN.get(seg, seg)
         rows.append(
             '<tr><td class="tn">%s%s<br><code>%s</code></td>'
