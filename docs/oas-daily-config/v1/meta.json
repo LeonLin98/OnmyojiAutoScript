@@ -1,0 +1,69 @@
+{
+  "version": "v1",
+  "date": "2026-10-26",
+  "captured_at": "2026-10-26T16:16:00+08:00",
+  "scope": "全部日常任务（56 个任务段 × 2 台）",
+  "source_of_truth": {
+    "button_tasks": "pair.html 的 DAILY 模板（还原按钮写回的值）",
+    "other_tasks": "真机 config（还原按钮不碰这些任务，真机即日常）",
+    "next_run": "不记录 —— 滚动值，每天都不一样"
+  },
+  "machines": {
+    "qingcui": {
+      "vm": "VM106",
+      "ip": "192.168.250.241",
+      "phone": "OnePlus5",
+      "serial": "823c342e"
+    },
+    "suolong": {
+      "vm": "VM103",
+      "ip": "192.168.250.240",
+      "phone": "K30U",
+      "serial": "jzypu4mbbum79lyh"
+    }
+  },
+  "oas": {
+    "head": "cc65d55dae353c810b1733dd59d692bff514fc0f",
+    "patches": {
+      "tasks/BondlingFairyland/battle.py": "C86A1F9884BECF0A",
+      "module/config/config_manual.py": "0EC24F60508A7E30",
+      "module/device/method/droidcast.py": "099B0B80B0F7A3DA",
+      "tasks/ActivityShikigami/assets.py": "0FDD42A0B3524088"
+    }
+  },
+  "summary": {
+    "qingcui": {
+      "total_task_segments": 58,
+      "enabled": 11,
+      "enabled_list": [
+        "area_boss",
+        "daily_trifles",
+        "demon_encounter",
+        "gold_youkai",
+        "goryou_realm",
+        "hunt",
+        "orochi",
+        "realm_raid",
+        "restart",
+        "ryou_toppa",
+        "talisman_pass"
+      ]
+    },
+    "suolong": {
+      "total_task_segments": 58,
+      "enabled": 10,
+      "enabled_list": [
+        "area_boss",
+        "daily_trifles",
+        "demon_encounter",
+        "duel",
+        "gold_youkai",
+        "hunt",
+        "orochi",
+        "realm_raid",
+        "restart",
+        "talisman_pass"
+      ]
+    }
+  }
+}

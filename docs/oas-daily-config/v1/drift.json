@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-26T16:16:00+08:00",
+  "note": "daily.json(应该是) vs 真机(实际是) 的差异。空 = 部署成功。非空 = 排查入口。",
+  "diffs": [
+    {
+      "cfg": "qingcui",
+      "task": "bondling_fairyland",
+      "field": "scheduler.enable",
+      "should_be": false,
+      "actually": true
+    },
+    {
+      "cfg": "qingcui",
+      "task": "bondling_fairyland",
+      "field": "bondling_config.user_status",
+      "should_be": "member",
+      "actually": "leader"
+    },
+    {
+      "cfg": "suolong",
+      "task": "bondling_fairyland",
+      "field": "scheduler.enable",
+      "should_be": false,
+      "actually": true
+    },
+    {
+      "cfg": "suolong",
+      "task": "bondling_fairyland",
+      "field": "bondling_config.user_status",
+      "should_be": "leader",
+      "actually": "member"
+    }
+  ]
+}
